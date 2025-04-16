@@ -2,6 +2,8 @@ package com.example.expense.service.impl;
 
 import com.example.expense.dto.request.UserCreationRequest;
 import com.example.expense.entity.User;
+import com.example.expense.exception.AppException;
+import com.example.expense.exception.ErrorCode;
 import com.example.expense.mapper.UserMapper;
 import com.example.expense.repository.UserRepository;
 import com.example.expense.service.UserService;
@@ -26,11 +28,8 @@ public class UserServiceImpl implements UserService {
     public User createUser(UserCreationRequest request) {
 
         if (userRepository.existsByUsername(request.getUsername()))
-            throw new RuntimeException("Username already exists");
+            throw new AppException(ErrorCode.USER_EXISTED);;
         User user = userMapper.toUser(request);
-        if (user == null) {
-            throw new RuntimeException("User creation failed, user is null");
-        }
         return userRepository.save(user);
     }
 
