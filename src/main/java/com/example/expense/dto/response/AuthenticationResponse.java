@@ -1,0 +1,4 @@
+package com.example.expense.dto.response;
+
+public class AuthenticationResponse {
+}
