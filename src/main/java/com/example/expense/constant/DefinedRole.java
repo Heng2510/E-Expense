@@ -1,5 +1,5 @@
 package com.example.expense.constant;
 
-public enum Role {
+public enum DefinedRole {
     ADMIN, USER;
 }

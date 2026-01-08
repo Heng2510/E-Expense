@@ -1,6 +1,7 @@
 package com.example.expense.mapper;
 
 import com.example.expense.dto.request.UserCreationRequest;
+import com.example.expense.dto.response.UserResponse;
 import com.example.expense.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,4 +13,5 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     User toUser(UserCreationRequest request);
+    UserResponse toUserResponse(User user);
 }

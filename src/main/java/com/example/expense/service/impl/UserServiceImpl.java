@@ -1,6 +1,7 @@
 package com.example.expense.service.impl;
 
 import com.example.expense.dto.request.UserCreationRequest;
+import com.example.expense.dto.response.UserResponse;
 import com.example.expense.entity.User;
 import com.example.expense.exception.AppException;
 import com.example.expense.exception.ErrorCode;
@@ -25,12 +26,12 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public User createUser(UserCreationRequest request) {
-
+    public UserResponse createUser(UserCreationRequest request) {
+        User user = userMapper.toUser(request);
         if (userRepository.existsByUsername(request.getUsername()))
             throw new AppException(ErrorCode.USER_EXISTED);;
-        User user = userMapper.toUser(request);
-        return userRepository.save(user);
+        user = userRepository.save(user);
+        return userMapper.toUserResponse(user);
     }
 
     @Override
